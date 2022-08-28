@@ -1,7 +1,7 @@
 {
-  "name": "loveit-src",
+  "name": "iloveit-src",
   "version": "0.2.0",
-  "description": "LoveIt theme source file",
+  "description": "iLoveIt theme source file",
   "private": true,
   "devDependencies": {
     "@algolia/cli": "^4.0.8",
@@ -27,16 +27,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dillonzq/LoveIt.git"
+    "url": "git+https://github.com/whitefirer/iLoveIt.git"
   },
   "keywords": [
     "hugo",
     "theme"
   ],
-  "author": "Dillon",
+  "author": "whitefirer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dillonzq/LoveIt/issues"
+    "url": "https://github.com/whitefirer/iLoveIt/issues"
   },
-  "homepage": "https://github.com/dillonzq/LoveIt#readme"
+  "homepage": "https://github.com/whitefirer/iLoveIt#readme"
 }

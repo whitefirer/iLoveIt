@@ -1,0 +1,22 @@
+<p>
+    <asciinema-player
+        {{- with .Get "src" }} src="{{ . }}" {{ end -}}
+        {{- with .Get "key" }} src="/casts/{{ . }}.cast"{{ end -}}
+        cols="{{ if .Get "cols" }}{{ .Get "cols" }}{{ else }}640{{ end }}"
+        rows="{{ if .Get "rows" }}{{ .Get "rows" }}{{ else }}10{{ end }}"
+        {{- with .Get "autoplay" }}autoplay="{{ . }}"{{ end -}}
+        {{- with .Get "preload" }}preload="{{ . }}"{{ end -}}
+        {{- with .Get "loop" }}loop="{{ . }}"{{ end -}}
+        start-at="{{ if .Get "start-at" }}{{ .Get "start-at" }}{{ else }}0{{ end }}"
+        speed="{{ if .Get "speed" }}{{ .Get "speed" }}{{ else }}1{{ end }}"
+        {{- with .Get "idle-time-limit" }}idle-time-limit="{{ . }}"{{ end -}}
+        {{- with .Get "poster" }} poster="{{ . | safeURL }}"{{ end -}}
+        {{- with .Get "font-size" }}font-size="{{ . }}"{{ end -}}
+        {{- with .Get "theme" }}theme="{{ . }}"{{ end -}}
+        {{- with .Get "title" }}title="{{ . }}"{{ end -}}
+        {{- with .Get "author" }}author="{{ . }}"{{ end -}}
+        {{- with .Get "author-url" }}author-url="{{ . }}"{{ end }}
+        {{- with .Get "author-img-url" }}author-img-url="{{ . }}"{{ end -}}
+        fit="{{ if .Get "fit" }}{{ .Get "fit" }}{{ else }}width{{ end }}"
+    ></asciinema-player>
+</p>

@@ -1,10 +1,10 @@
-name = "LoveIt"
+name = "iLoveIt"
 license = "MIT"
-licenselink = "https://github.com/dillonzq/LoveIt/blob/master/LICENSE"
+licenselink = "https://github.com/whitefirer/iLoveIt/blob/master/LICENSE"
 description = "A Clean, Elegant but Advanced Hugo Theme for Hugo."
 
-homepage = "https://hugoloveit.com"
-demosite = "https://hugoloveit.com"
+homepage = "https://whitefirer.org"
+demosite = "https://whitefirer.org"
 
 tags = [
   "blog",
@@ -26,10 +26,10 @@ features = [
 min_version = "0.62.0"
 
 [author]
-  name = "Dillon"
-  homepage = "https://dillonzq.com/"
+  name = "whitefirer"
+  homepage = "https://whitefirer.org/"
 
 [original]
-  name = "Fastbyte01"
-  homepage = "https://www.fsb01.com/"
+  name = "Dillon"
+  homepage = "https://dillonzq.com/"
   repo = "https://github.com/Fastbyte01/KeepIt"

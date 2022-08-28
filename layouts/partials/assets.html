@@ -119,8 +119,14 @@
     {{- $config = dict "strict" false "delimiters" $delimiters | dict "math" | merge $config -}}
 {{- end -}}
 
+{{- /* asciinema */ -}}
+{{- if (.Scratch.Get "this").asciinema | or $params.draft -}}
+    {{- $source := $cdn.asciinemaJS | default "lib/asciinema/asciinema-player.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- end -}}
+
 {{- /* mermaid */ -}}
-{{- if (.Scratch.Get "this").mermaid -}}
+{{- if (.Scratch.Get "this").mermaid | or $params.draft -}}
     {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $_ := (resources.Get "lib/mermaid/mermaid.min.js.map").RelPermalink -}}
