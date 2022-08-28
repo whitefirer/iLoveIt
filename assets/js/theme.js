@@ -647,6 +647,11 @@ var Theme = /*#__PURE__*/function () {
       if (this.config.math) renderMathInElement(document.body, this.config.math);
     }
   }, {
+    key: "initAsciinema",
+    value: function initAsciinema() {
+      if (this.config.asciinema) renderMathInElement(document.body, this.config.asciinema);
+    }
+  }, {
     key: "initMermaid",
     value: function initMermaid() {
       var _this7 = this;
@@ -1057,6 +1062,7 @@ var Theme = /*#__PURE__*/function () {
         this.initTable();
         this.initHeaderLink();
         this.initMath();
+        this.initAsciinema();
         this.initMermaid();
         this.initEcharts();
         this.initTypeit();

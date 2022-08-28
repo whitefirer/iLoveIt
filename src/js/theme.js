@@ -488,6 +488,10 @@ class Theme {
         if (this.config.math) renderMathInElement(document.body, this.config.math);
     }
 
+    initAsciinema() {
+        if (this.config.asciinema) renderMathInElement(document.body, this.config.asciinema);
+    }
+
     initMermaid() {
         this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
             const $mermaidElements = document.getElementsByClassName('mermaid');
@@ -765,6 +769,7 @@ class Theme {
             this.initTable();
             this.initHeaderLink();
             this.initMath();
+            this.initAsciinema();
             this.initMermaid();
             this.initEcharts();
             this.initTypeit();
