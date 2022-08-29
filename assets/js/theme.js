@@ -649,7 +649,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initAsciinema",
     value: function initAsciinema() {
-      if (this.config.asciinema) renderMathInElement(document.body, this.config.asciinema);
+      if (this.config.asciinema) renderAsciinemaInElement(document.body, this.config.asciinema);
     }
   }, {
     key: "initMermaid",
@@ -1062,7 +1062,7 @@ var Theme = /*#__PURE__*/function () {
         this.initTable();
         this.initHeaderLink();
         this.initMath();
-        this.initAsciinema();
+        // this.initAsciinema();
         this.initMermaid();
         this.initEcharts();
         this.initTypeit();

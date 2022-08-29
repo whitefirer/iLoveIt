@@ -120,7 +120,7 @@
 {{- end -}}
 
 {{- /* asciinema */ -}}
-{{- if (.Scratch.Get "this").asciinema| or $params.draft -}}
+{{- if (.Scratch.Get "this").asciinema | or $params.draft -}}
     {{- $source := $cdn.asciinemaJS | default "lib/asciinema/asciinema-player.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}

@@ -769,7 +769,7 @@ class Theme {
             this.initTable();
             this.initHeaderLink();
             this.initMath();
-            this.initAsciinema();
+            // this.initAsciinema();
             this.initMermaid();
             this.initEcharts();
             this.initTypeit();
