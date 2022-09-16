@@ -337,6 +337,7 @@
                         gameKey = VK_DOWN;
                         break;
                     case 'matrix':
+                        dropInfoList = [];
                         break;
                 }
             }
@@ -354,14 +355,10 @@
                 }
 
                 if (dropInfoList.length == 0) {
-                    // dropInfoList = Array(term.cols).fill({ypos: 0});
                     for (let i = 0; i < term.cols; i++) {
                         dropInfoList.push(new DropInfo(0, 0));
                     }
                 }
-                
-                // term.buffer.x = -1;
-                // term.buffer.y = -1;
                 // styleList = [0x8000000, 0x300ff00, 0x300ee00, 0x300dd00, 0x300cc00, 0x300bb00, 0x300aa00, 0x3009900, 0x3008800, 0x3007700, 0x3006600, 0x3005500, 0x3004400, 0x3002200, 0x200ff00, 0]
                 styleList = [0x8000000, 0x9000002, 0x300ff00, 0x300cc00, 0x300aa00, 0x3008800, 0x3006600, 0x3004400, 0x3002200, 0x200ff00, 0x9000000, 0] // green
                 // styleList = [0x8000000, 0x9000007, 0x3ffffff, 0x3cccccc, 0x3aaaaaa, 0x3888888, 0x3666666, 0x3444444, 0x3222222, 0] // white
