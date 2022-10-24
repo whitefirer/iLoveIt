@@ -453,6 +453,7 @@
                 ].join('\n\r'));
 
                 term.writeln('Below is a simple emulated backend, try running `charain`, `matrix` or `help`.');
+                term.writeln('');
                 term.prompt();
             }
 
@@ -462,11 +463,13 @@
 
             $(document).ready(function () {
                 $("#_selectgame").change(function (e) {
-                    runCommand(term, e.target.value); //选择的值
+                    term.writeln(e.target.value);
+                    runCommand(term, e.target.value);
                 });
 
                 $('#_start').click(function (e) {
-                    runCommand(term, $("#_selectgame")[0].selectedOptions[0].value); //选择的值
+                    term.writeln($("#_selectgame")[0].selectedOptions[0].value);
+                    runCommand(term, $("#_selectgame")[0].selectedOptions[0].value);
                 });
 
                 $('#_quite').click(function (e) {
