@@ -1,3 +1,5 @@
 {{- $id := dict "Content" (trim .Inner "\n") "Scratch" .Page.Scratch | partial "function/id.html" -}}
-<div class="mermaid" id="{{ $id }}"></div>
+{{- $content := trim .Inner "\n" -}}
+<div class="mermaid" id="{{ $id }}">{{ $content }}</div>
+<script>window.config=window.config||{};window.config.data=window.config.data||{};window.config.data['{{ $id }}']=document.getElementById('{{ $id }}').textContent.trim();</script>
 {{- .Page.Scratch.SetInMap "this" "mermaid" true -}}
