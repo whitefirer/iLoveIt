@@ -18,3 +18,5 @@ $RECYCLE.BIN/
 
 # Linux
 .directory
+.hugo_build.lock
+resources/_gen/
