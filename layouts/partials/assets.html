@@ -133,6 +133,9 @@
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $_ := (resources.Get "lib/mermaid/mermaid.min.js.map").RelPermalink -}}
 
+    {{- /* mermaid v10 compat: old render(id,text,cb,el) -> new render(id,text,el) returning {svg} */ -}}
+    {{- dict "Content" "!function(){if(typeof mermaid!=='undefined'){var r=mermaid.render.bind(mermaid);mermaid.render=function(id,text,cb,el){if(arguments.length>=4&&typeof cb==='function'){return r(id,text,el).then(function(o){cb(o.svg||o)})}return r.apply(mermaid,arguments)}}}()" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+
     {{- /* mermaid toolbar styles */ -}}
     <style>
     .mermaid-wrapper {
