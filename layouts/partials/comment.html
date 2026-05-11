@@ -57,6 +57,24 @@
             </noscript>
         {{- end -}}
 
+        {{- /* Waline Comment System */ -}}
+        {{- $waline := $comment.waline | default dict -}}
+        {{- if $waline.enable -}}
+            <div id="waline" class="comment"></div>
+            {{- $source := $cdn.walineJS | default "lib/waline/waline.js" -}}
+            {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+            {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL | dict "waline" | merge $commentConfig -}}
+            {{- $commentConfig = $waline.lang | default "zh-CN" | dict "lang" | dict "waline" | merge $commentConfig -}}
+            {{- $commentConfig = $waline.darkMode | default "auto" | dict "dark" | dict "waline" | merge $commentConfig -}}
+            {{- $commentConfig = dict "pageSize" ($waline.pageSize | default 10) | dict "waline" | merge $commentConfig -}}
+            {{- with $waline.requiredMeta -}}
+                {{- $commentConfig = dict "requiredMeta" . | dict "waline" | merge $commentConfig -}}
+            {{- end -}}
+            <noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/">Waline</a>.
+            </noscript>
+        {{- end -}}
+
         {{- /* Facebook Comment System */ -}}
         {{- $facebook := $comment.facebook | default dict -}}
         {{- if $facebook.enable -}}

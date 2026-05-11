@@ -841,6 +841,10 @@ var Theme = /*#__PURE__*/function () {
 
         if (this.config.comment.valine) new Valine(this.config.comment.valine);
 
+        if (this.config.comment.waline) {
+          Waline.init(this.config.comment.waline);
+        }
+
         if (this.config.comment.utterances) {
           var utterancesConfig = this.config.comment.utterances;
           var script = document.createElement('script');
