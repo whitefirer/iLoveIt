@@ -63,6 +63,8 @@
             <div id="waline" class="comment"></div>
             {{- $source := $cdn.walineJS | default "lib/waline/waline.js" -}}
             {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+            {{- $source := $cdn.walineCSS | default "lib/waline/waline.css" -}}
+            {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
             {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL | dict "waline" | merge $commentConfig -}}
             {{- $commentConfig = $waline.lang | default "zh-CN" | dict "lang" | dict "waline" | merge $commentConfig -}}
             {{- $commentConfig = $waline.darkMode | default "auto" | dict "dark" | dict "waline" | merge $commentConfig -}}
