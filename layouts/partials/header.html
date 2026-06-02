@@ -28,13 +28,28 @@
         <div class="menu">
             <div class="menu-inner">
                 {{- range .Site.Menus.main -}}
-                    {{- $url := .URL | relLangURL -}}
-                    {{- with .Page -}}
-                        {{- $url = .RelPermalink -}}
+                    {{- if .HasChildren -}}
+                        <div class="menu-item has-dropdown{{ if $.HasMenuCurrent `main` . }} active{{ end }}">
+                            <span class="dropdown-toggle">{{ .Name }} <i class="fas fa-chevron-down fa-fw"></i></span>
+                            <div class="dropdown-menu">
+                                {{- range .Children -}}
+                                    {{- $url := .URL | relLangURL -}}
+                                    {{- with .Page -}}{{- $url = .RelPermalink -}}{{- end -}}
+                                    <a class="dropdown-item{{ if $.IsMenuCurrent `main` . }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+                                        {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
+                                    </a>
+                                {{- end -}}
+                            </div>
+                        </div>
+                    {{- else -}}
+                        {{- $url := .URL | relLangURL -}}
+                        {{- with .Page -}}
+                            {{- $url = .RelPermalink -}}
+                        {{- end -}}
+                        <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                            {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
+                        </a>
                     {{- end -}}
-                    <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                        {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
-                    </a>
                 {{- end -}}
                 {{- if .Site.Menus.main -}}
                     <span class="menu-item delimiter"></span>
@@ -83,6 +98,23 @@
         </div>
     </div>
 </header>
+<script>
+(function() {
+    document.querySelectorAll('.has-dropdown .dropdown-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var parent = this.closest('.has-dropdown');
+            parent.classList.toggle('open');
+        });
+    });
+    document.addEventListener('click', function() {
+        document.querySelectorAll('.has-dropdown.open').forEach(function(d) {
+            d.classList.remove('open');
+        });
+    });
+})();
+</script>
 
 {{- /* Mobile header */ -}}
 <header class="mobile" id="header-mobile">
@@ -138,13 +170,28 @@
             {{- end -}}
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
-                {{- $url := .URL | relLangURL -}}
-                {{- with .Page -}}
-                    {{- $url = .RelPermalink -}}
+                {{- if .HasChildren -}}
+                    <div class="menu-item has-dropdown">
+                        <span class="dropdown-toggle">{{ .Name }} <i class="fas fa-chevron-down fa-fw"></i></span>
+                        <div class="dropdown-menu">
+                            {{- range .Children -}}
+                                {{- $url := .URL | relLangURL -}}
+                                {{- with .Page -}}{{- $url = .RelPermalink -}}{{- end -}}
+                                <a class="dropdown-item" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+                                    {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
+                                </a>
+                            {{- end -}}
+                        </div>
+                    </div>
+                {{- else -}}
+                    {{- $url := .URL | relLangURL -}}
+                    {{- with .Page -}}
+                        {{- $url = .RelPermalink -}}
+                    {{- end -}}
+                    <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                        {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
+                    </a>
                 {{- end -}}
-                <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                    {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
-                </a>
             {{- end -}}
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
