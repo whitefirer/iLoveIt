@@ -27,10 +27,18 @@
             {{- else -}}
                 {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
             {{- end -}}
+            {{- $stickies := where $pages "Params.sticky" true -}}
+            {{- $pages = $pages | complement $stickies -}}
             {{- with $posts.paginate | default .Site.Params.paginate -}}
                 {{- $pages = $.Paginate $pages . -}}
             {{- else -}}
                 {{- $pages = .Paginate $pages -}}
+            {{- end -}}
+            {{- /* Sticky posts: first page only */ -}}
+            {{- if not .Paginator.HasPrev -}}
+                {{- range $stickies -}}
+                    {{- .Render "summary" -}}
+                {{- end -}}
             {{- end -}}
             {{- range $pages.Pages -}}
                 {{- .Render "summary" -}}
