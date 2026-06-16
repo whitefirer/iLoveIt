@@ -35,6 +35,18 @@
                     <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Params.author.link | default .Site.Home.RelPermalink }}" target="_blank">{{ .Site.Params.author.name }}</a></span>
                 {{- end -}}
 
+                {{- /* 整站访问计数 — hits.sh
+                     线上: 1px 隐身 img，加载即计数，不可见
+                     hugo server: 显示 badge，看真实累计访问量 */ -}}
+                {{- $hitsSrc := "https://hits.sh/whitefirer.org.svg" -}}
+                {{- if hugo.IsServer -}}
+                    &nbsp;<a href="https://hits.sh/whitefirer.org/" target="_blank" title="整站访问量">
+                        <img src="{{ $hitsSrc }}?style=flat-square&label=&color=D97757&labelColor=1f2937&logo=googleanalytics&logoColor=white" alt="整站访问量" style="vertical-align:middle;height:16px;margin-left:6px">
+                    </a>
+                {{- else -}}
+                    <img src="{{ $hitsSrc }}" alt="" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;clip:rect(0 0 0 0);pointer-events:none">
+                {{- end -}}
+
                 {{- /* License */ -}}
                 {{- with .Site.Params.footer.license -}}
                     &nbsp;|&nbsp;<span class="license">{{ . | safeHTML }}</span>
