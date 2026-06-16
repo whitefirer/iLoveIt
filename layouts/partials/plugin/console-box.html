@@ -6,6 +6,7 @@
     <script src="https://fastly.jsdelivr.net/npm/jquery@3.1.1/dist/jquery.slim.min.js"></script>
     <script src="https://fastly.jsdelivr.net/npm/xterm@4.18.0/lib/xterm.min.js"></script>
     <script src="https://fastly.jsdelivr.net/npm/xterm-addon-webgl@0.12.0-beta.15/lib/xterm-addon-webgl.js"></script>
+    <script src="https://fastly.jsdelivr.net/npm/xterm-addon-web-links@0.8.0/lib/xterm-addon-web-links.min.js"></script>
     <script src="https://fastly.jsdelivr.net/pyodide/v0.23.0/full/pyodide.js"></script>
     <script>
         $(function () {
@@ -84,9 +85,8 @@
             var cmdY = 0;
             var welcomeTips = [
                 [..."Welcome to my blog"],
-                [..."Go big or go home"],
-                [..."Cloud Native and Architecture Design"],
-                [..."人 生 苦 短 ， 何 不 用 python， 星 汉 灿 烂 ， 道 阻 且 长 go"],
+                [..."从云原生到 AI 工程化"],
+                [..."Cloud Native × AI Engineering"],
                 [..."难 度 即 价 值 所 在"],
             ]
 
@@ -100,6 +100,16 @@
             try {
                 const webgl = new window.WebglAddon.WebglAddon();
                 term.loadAddon(webgl);
+                var wl = new WebLinksAddon();
+                term.loadAddon(wl);
+                term.registerLinkProvider({provideLinks:function(n,c){
+                    var l=term.buffer.active.getLine(n);
+                    if(!l||l.isWrapped){c(void 0);return;}
+                    var t=l.translateToString(!0),i=t.indexOf('whitefirer');
+                    if(i===-1){c(void 0);return;}
+                    c([{range:{start:{x:i,y:n},end:{x:i+10,y:n}},text:'whitefirer',
+                        activate:function(){window.open('https://github.com/whitefirer','_blank');}}]);
+                }});
                 isWebglEnabled = true;
             } catch (e) {
                 console.warn('WebGL addon threw an exception during load', e);
@@ -726,26 +736,26 @@
             function initConsole() {
                 term.reset();
                 term.writeln([
-                    '         Welcome! whitefirer.org is a blog for technical exchange',
-                    '                           \x1b[4m\x1b[3m\x1b[1mBlog\x1b[0m, \x1b[4m\x1b[3m\x1b[1mGithub\x1b[0m and \x1b[3mGame\x1b[0m!',
-                    '',
-                    ' ┌ \x1b[1mAbout\x1b[0m ─────────────────────────────────────────────────────────────────────┐',
-                    ' │                                                                            │',
-                    ' │  \x1b[31;1mProfile                                \x1b[32mTechnology\x1b[0m                         │',
-                    ' │   Name: 王诚强 (mortywang)               Cloud Native                      │',
-                    ' │   Github: whitefirer                     \x1b[3mDistributed System\x1b[0m                │',
-                    ' │                                                                            │',
-                    ' │  \x1b[33;1mContact                                \x1b[34mLanguages\x1b[0m                          │',
-                    ' │   whitefirer@gmail.com                   Go Python C C++ TypeScript HCL    │',
-                    ' │                                                                            │',
-                    ' │  \x1b[35;1mIntroduction                           \x1b[36mAnd much more...\x1b[0m                   │',
-                    ' │   Hi, I\'m a developer that                                                 │',
-                    ' │   working for tencent music                                                │',
-                    ' │   If you also like technology                                              │',
-                    ' │   please conact with me.                                                   │',
-                    ' └────────────────────────────────────────────────────────────────────────────┘',
-                    ''
-                ].join('\n\r'));
+'Welcome! whitefirer.org — Cloud Native to AI Engineering',
+'',
+'',
+' ┌ \x1b[1mAbout\x1b[0m ─────────────────────────────────────────────────────────────────────┐',
+' │                                                                            │',
+' │  \x1b[31;1mProfile                                \x1b[32mFocus\x1b[0m                              │',
+' │   Name: 王诚强 (mortywang)       Cloud Native → AI Engineering             │',
+' │   Github: whitefirer              Agent Orchestration · Mesh               │',
+' │                                                                            │',
+' │  \x1b[33;1mContact                                \x1b[34mStack\x1b[0m                              │',
+' │   whitefirer@gmail.com                   Go Python C C++ TypeScript HCL    │',
+' │                                                                            │',
+' │  \x1b[35;1mIntroduction                           \x1b[36mAnd much more...\x1b[0m                   │',
+' │   Worked for tencent music                                                 │',
+' │   Previously: tenclass.com, infra lead                                     │',
+' │   Now: independent, AI Engineering                                         │',
+' │                                                                            │',
+' └────────────────────────────────────────────────────────────────────────────┘',
+''
+].join('\n\r'));
 
                 term.writeln('Below is a simple emulated backend, try running `charain`, `matrix` or `help`.');
                 term.writeln('Now you can use the \x1b[3m\x1b[1mPython\x1b[0m directly in this console!');
